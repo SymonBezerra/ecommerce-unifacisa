@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+    {% block styles %}{% endblock %}
+    <script src="//unpkg.com/alpinejs" defer></script>
+</head>
+
+<body>
+    <div class="ecommerce-container">
+        {% include "sidebar.html" %}
+        <div class="ecommerce-content">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</body>
+
+</html>

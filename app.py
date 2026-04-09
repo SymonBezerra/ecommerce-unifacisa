@@ -1,10 +1,15 @@
 import os
 
+from dotenv import load_dotenv
 from flask import Flask, render_template
 from flask_login import LoginManager
 
 from generic.model import db
+from login.blueprint import login_bp
 from users.model import UserModel
+
+
+load_dotenv()
 
 
 app = Flask(__name__)
@@ -14,6 +19,12 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
+app.register_blueprint(login_bp)
+
+with app.app_context():
+    db.create_all()
+
+login_manager.login_view = "login.index"
 
 
 @login_manager.user_loader

@@ -35,3 +35,8 @@ body {
     flex-direction: column;
     padding: 1rem 2rem;
 }
+
+.ecommerce-logout {
+    color: aliceblue;
+    cursor: pointer;
+}

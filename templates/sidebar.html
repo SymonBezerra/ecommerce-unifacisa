@@ -6,4 +6,8 @@
     <a href="#">Products</a>
     <a href="#">Users</a>
     <a href="#">Sales</a>
+    <div style="flex: 1;"></div>
+    <div class="ecommerce-logout" x-data="sidebar()" x-on:click="logout()">Logout</div>
 </div>
+
+<script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>

@@ -7,7 +7,7 @@ db = SQLAlchemy()
 class BaseModel(db.Model):
     __abstract__ = True  # <-- important: no table will be created
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
     created_at = db.Column(db.DateTime, default=datetime.now(timezone.utc))
     updated_at = db.Column(

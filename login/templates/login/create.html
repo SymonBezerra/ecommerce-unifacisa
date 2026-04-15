@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="login-container" x-data="loginForm()">
+    <div class="login-container" x-data="registerForm()">
         <div class="login-form">
             <h2>Ecommerce</h2>
             <div class="login-item">
@@ -18,13 +18,15 @@
                 <input type="text" placeholder="Enter your username" x-model="username">
                 <p>Password</p>
                 <input type="password" placeholder="Enter your password" x-model="password">
+                <p>Confirm Password</p>
+                <input type="password" placeholder="Confirm your password" x-model="confirmPassword">
             </div>
-            <div class="login-submit" x-on:click="submitLogin()">Login</div>
+            <div class="login-submit" x-on:click="submitRegister()">Register</div>
             <p style="color: red;" x-text="errorMsg"></p>
-            <a class="login-register" href="{{ url_for('login.register') }}">Don't have an account? Register</a>
+            <a class="login-register" href="{{ url_for('login.index') }}">Already have an account? Login</a>
         </div>
 
-        <script src="{{ url_for('login.static', filename='js/index.js')}}"></script>
+        <script src="{{ url_for('login.static', filename='js/create.js')}}"></script>
 </body>
 
 </html>

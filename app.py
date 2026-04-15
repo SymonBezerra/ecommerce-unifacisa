@@ -2,7 +2,7 @@ import os
 
 from dotenv import load_dotenv
 from flask import Flask, render_template
-from flask_login import LoginManager
+from flask_login import LoginManager, login_required
 
 from generic.model import db
 from login.blueprint import login_bp
@@ -32,6 +32,7 @@ def load_user(user_id):
     return UserModel.get(user_id)
 
 
+@login_required
 @app.route("/")
 def home():
     return render_template("home.html")

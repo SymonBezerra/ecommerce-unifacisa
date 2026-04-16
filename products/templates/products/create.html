@@ -3,7 +3,7 @@
 {% block title %}Create Product{% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" href="{{ url_for('projects.static', filename='styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('products.static', filename='styles.css') }}">
 <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
 {% endblock %}
 
@@ -40,5 +40,5 @@
     <div class="products-submit-btn" x-on:click="submitProduct()">Submit</div>
 </div>
 
-<script src="{{ url_for('projects.static', filename='js/create.js')}}"></script>
+<script src="{{ url_for('products.static', filename='js/create.js')}}"></script>
 {% endblock %}

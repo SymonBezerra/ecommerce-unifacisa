@@ -41,8 +41,8 @@ def register():
         return jsonify({"message": "User created successfully"}), 201
 
 
-@login_required
 @login_bp.post("/logout")
+@login_required
 def logout():
     logout_user()
     return jsonify({"message": "Logout successful"}), 200

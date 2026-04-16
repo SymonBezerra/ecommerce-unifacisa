@@ -34,7 +34,7 @@ def load_user(user_id):
     return UserModel.get(user_id)
 
 
-@login_required
 @app.route("/")
+@login_required
 def home():
     return render_template("home.html")

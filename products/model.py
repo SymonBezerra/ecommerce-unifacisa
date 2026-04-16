@@ -1,8 +1,8 @@
 from generic.model import BaseModel, db
 
 
-class ProjectModel(BaseModel):
-    __tablename__ = "projects"
+class ProductModel(BaseModel):
+    __tablename__ = "products"
 
     name = db.Column(db.String(80), unique=True, nullable=False)
     description = db.Column(db.Text, nullable=False)

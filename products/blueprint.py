@@ -1,8 +1,10 @@
+from datetime import datetime
+
 from flask import Blueprint, render_template, request
 from flask_login import login_required
 
 
-from products.model import ProjectModel
+from products.model import ProductModel
 
 
 products_bp = Blueprint(
@@ -14,28 +16,28 @@ products_bp = Blueprint(
 )
 
 
-@login_required
 @products_bp.get("/")
+@login_required
 def list():
     return render_template("products/list.html")
 
 
-@login_required
 @products_bp.route("/create", methods=("GET", "POST"))
+@login_required
 def create():
     if request.method == "GET":
         return render_template("products/create.html")
     elif request.method == "POST":
         data = request.get_json()
-        project = ProjectModel(
+        product = ProductModel(
             name=data["name"],
             description=data["description"],
             type=data["type"],
             price=data["price"],
-            expirationDate=data["expirationDate"],
+            expirationDate=datetime.strptime(data["expirationDate"], "%d/%m/%Y").date(),
         )
         try:
-            project.save()
-            return {"message": "Project created successfully!"}, 201
+            product.save()
+            return {"message": "Product created successfully!"}, 201
         except Exception as e:
             return {"error": str(e)}, 400

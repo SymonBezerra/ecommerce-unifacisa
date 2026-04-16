@@ -6,7 +6,7 @@ from flask_login import LoginManager, login_required
 
 from generic.model import db
 from login.blueprint import login_bp
-from projects.blueprint import projects_bp
+from products.blueprint import products_bp
 from users.model import UserModel
 
 
@@ -21,7 +21,7 @@ db.init_app(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 app.register_blueprint(login_bp)
-app.register_blueprint(projects_bp)
+app.register_blueprint(products_bp)
 
 with app.app_context():
     db.create_all()

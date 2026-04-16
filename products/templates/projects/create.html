@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Create Product{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('projects.static', filename='styles.css') }}">
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<h1>Create Product</h1>
+
+<div class="products-create-form" x-data="createProductForm()">
+    <div class="products-create-form-item">
+        <h2>Name</h2>
+        <input type="text" id="name" x-model="name">
+    </div>
+
+    <div class="products-create-form-item">
+        <h2>Description</h2>
+        <textarea id="description" x-model="description"></textarea>
+    </div>
+
+    <div class="products-create-form-item">
+        <h2>Price</h2>
+        <input x-mask:dynamic="$money($input, ',')" x-model="price">
+    </div>
+
+    <div class="products-create-form-item">
+        <h2>Type</h2>
+        <input type="text" x-model="type">
+    </div>
+
+    <div class="products-create-form-item">
+        <h2>Expiration Date</h2>
+        <input type="text" x-mask="99/99/9999" x-model="expirationDate">
+    </div>
+
+
+    <div class="products-submit-btn" x-on:click="submitProduct()">Submit</div>
+</div>
+
+<script src="{{ url_for('projects.static', filename='js/create.js')}}"></script>
+{% endblock %}

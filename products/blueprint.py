@@ -19,7 +19,15 @@ products_bp = Blueprint(
 @products_bp.get("/")
 @login_required
 def list():
-    return render_template("products/list.html")
+    products = ProductModel.query.all()
+    return render_template("products/list.html", products=products)
+
+
+@products_bp.get("/<int:product_id>")
+@login_required
+def index(product_id):
+    product = ProductModel.query.get_or_404(product_id)
+    return render_template("products/index.html", product=product)
 
 
 @products_bp.route("/create", methods=("GET", "POST"))

@@ -11,4 +11,14 @@
 <div class="products-create-div" x-data="createProductForm()">
     <a href="{{ url_for('products.create') }}" class="products-create-btn">Create New Product</a>
 </div>
+
+<div class="products-listing">
+    {% for product in products %}
+    <a class="product-item" href="{{ url_for('products.index', product_id=product.id) }}">
+        <h2>{{ product.name }} (SKU: {{ product.id }})</h2>
+        <p>{{ product.description }}</p>
+        <p>Type: {{ product.type }}</p>
+    </a>
+    {% endfor %}
+</div>
 {% endblock %}

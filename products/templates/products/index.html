@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Product Details{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('products.static', filename='styles.css') }}">
+{% endblock %}
+
+{% block content %}
+<h1>{{ product.name }}</h1>
+<h2>SKU: {{ product.id }}</h2>
+<p>{{ product.description }}</p>
+<p>Type: {{ product.type }}</p>
+<p>Price: {{ product.price }}</p>
+<p>Expiration Date: {{ product.expirationDate }}</p>
+{% endblock %}

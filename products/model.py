@@ -8,4 +8,4 @@ class ProductModel(BaseModel):
     description = db.Column(db.Text, nullable=False)
     type = db.Column(db.String(80), nullable=False)
     price = db.Column(db.Float, nullable=False)
-    expirationDate = db.Column(db.Date, nullable=False)
+    expiration_date = db.Column(db.Date, nullable=False)

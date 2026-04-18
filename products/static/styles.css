@@ -55,15 +55,45 @@
 }
 
 .product-item {
+    display: flex;
+    flex-direction: row;
     width: 80%;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     color: white;
     text-decoration: none;
+    align-items: center;
 }
 
+/* 
 .product-item:hover {
     background-color: #f0f0f040;
+    cursor: pointer;
+} */
+
+.product-edit {
+    padding: 5px;
+    color: #1976D2;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 40px;
+}
+
+.product-remove {
+    padding: 5px;
+    color: #1976D2;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 40px;
+}
+
+.product-edit:hover {
+    color: #1565C0;
+    cursor: pointer;
+}
+
+.product-remove:hover {
+    color: #1565C0;
     cursor: pointer;
 }

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Create Product{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('products.static', filename='styles.css') }}">
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<h1>Edit Product</h1>
+
+<div class="products-create-form" x-data="editProductForm()">
+    <div class="products-create-form-item">
+        <h2>Name</h2>
+        <input type="text" id="name" x-model="name">
+    </div>
+
+    <div class="products-create-form-item">
+        <h2>Description</h2>
+        <textarea id="description" x-model="description"></textarea>
+    </div>
+
+    <div class="products-create-form-item">
+        <h2>Price</h2>
+        <input x-mask:dynamic="$money($input, ',')" x-model="price">
+    </div>
+
+    <div class="products-create-form-item">
+        <h2>Type</h2>
+        <input type="text" x-model="type">
+    </div>
+
+    <div class="products-create-form-item">
+        <h2>Expiration Date</h2>
+        <input type="text" x-mask="99/99/9999" x-model="expirationDate">
+    </div>
+
+
+    <div class="products-submit-btn" x-on:click="submitProduct()">Submit</div>
+</div>
+
+<script>
+    function editProductForm() {
+        return {
+            name: "{{ product.name }}",
+            description: "{{ product.description }}",
+            price: "{{ product.price }}",
+            type: "{{ product.type }}",
+            expirationDate: "{{ expiration_date }}",
+
+            submitProduct() {
+                fetch(`{{ url_for('products.edit', product_id=product.id) }}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: this.name,
+                        description: this.description,
+                        price: this.price,
+                        type: this.type,
+                        expirationDate: this.expirationDate
+                    })
+                }).then(response => {
+                    if (response.ok) {
+                        window.location.href = `{{ url_for('products.list') }}`;
+                    } else {
+                        alert('Failed to update product');
+                    }
+                });
+            }
+        }
+    }
+</script>
+{% endblock %}

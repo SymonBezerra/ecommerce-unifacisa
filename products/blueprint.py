@@ -42,10 +42,49 @@ def create():
             description=data["description"],
             type=data["type"],
             price=data["price"],
-            expirationDate=datetime.strptime(data["expirationDate"], "%d/%m/%Y").date(),
+            expiration_date=datetime.strptime(
+                data["expirationDate"], "%d/%m/%Y"
+            ).date(),
         )
         try:
             product.save()
             return {"message": "Product created successfully!"}, 201
         except Exception as e:
             return {"error": str(e)}, 400
+
+
+@products_bp.route("/edit/<int:product_id>", methods=("GET", "PATCH"))
+@login_required
+def edit(product_id):
+    product = ProductModel.query.get_or_404(product_id)
+    if request.method == "GET":
+        return render_template(
+            "products/edit.html",
+            product=product,
+            expiration_date=product.expiration_date.strftime("%d/%m/%Y"),
+        )
+    elif request.method == "PATCH":
+        data = request.get_json()
+        product.name = data["name"]
+        product.description = data["description"]
+        product.type = data["type"]
+        product.price = data["price"]
+        product.expiration_dsate = datetime.strptime(
+            data["expirationDate"], "%d/%m/%Y"
+        ).date()
+        try:
+            product.save()
+            return {"message": "Product updated successfully!"}, 200
+        except Exception as e:
+            return {"error": str(e)}, 400
+
+
+@products_bp.delete("/delete/<int:product_id>")
+@login_required
+def delete(product_id):
+    product = ProductModel.query.get_or_404(product_id)
+    try:
+        product.delete()
+        return {"message": "Product deleted successfully!"}, 200
+    except Exception as e:
+        return {"error": str(e)}, 400

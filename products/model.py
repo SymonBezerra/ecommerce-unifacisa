@@ -9,3 +9,5 @@ class ProductModel(BaseModel):
     type = db.Column(db.String(80), nullable=False)
     price = db.Column(db.Float, nullable=False)
     expiration_date = db.Column(db.Date, nullable=False)
+
+    sales = db.relationship("SaleModel", back_populates="product")

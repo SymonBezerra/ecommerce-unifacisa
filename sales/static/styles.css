@@ -1,0 +1,99 @@
+.sales-create-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.sales-create-btn {
+    padding: 10px;
+    background-color: #1976D2;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.sales-create-btn:hover {
+    background-color: #1565C0;
+    cursor: pointer;
+}
+
+.sales-create-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.sales-create-form-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sales-submit-btn {
+    padding: 10px;
+    background-color: #1976D2;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 40px;
+}
+
+.sales-submit-btn:hover {
+    background-color: #1565C0;
+    cursor: pointer;
+}
+
+.sales-listing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    overflow-y: auto;
+    margin-top: 2rem;
+}
+
+.sale-item {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    align-items: center;
+}
+
+/* 
+.sale-item:hover {
+    background-color: #f0f0f040;
+    cursor: pointer;
+} */
+
+.sale-edit {
+    padding: 5px;
+    color: #1976D2;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 40px;
+}
+
+.sale-remove {
+    padding: 5px;
+    color: #1976D2;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 40px;
+}
+
+.sale-edit:hover {
+    color: #1565C0;
+    cursor: pointer;
+}
+
+.sale-remove:hover {
+    color: #1565C0;
+    cursor: pointer;
+}

@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from flask import Flask, render_template
 from flask_login import LoginManager, login_required
 
+from sales.blueprint import sales_bp
 from generic.model import db
 from login.blueprint import login_bp
 from products.blueprint import products_bp
@@ -22,6 +23,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 app.register_blueprint(login_bp)
 app.register_blueprint(products_bp)
+app.register_blueprint(sales_bp)
 
 with app.app_context():
     db.create_all()

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Sale{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('sales.static', filename='styles.css') }}">
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<h1>Edit Sale</h1>
+
+<div class="sales-create-form" x-data="editSaleForm()">
+    <div class="sales-create-form-item">
+        <h2>Description</h2>
+        <textarea id="description" x-model="description"></textarea>
+    </div>
+
+    <div class="sales-create-form-item">
+        <h2>SKU</h2>
+        <input type="text" x-model="sku" placeholder="Enter SKU (integer value)">
+    </div>
+
+    <div class="sales-create-form-item">
+        <h2>Discount</h2>
+        <input type="number" step="0.01" placeholder="Enter discount value" x-model="discount"
+            x-mask:dynamic="$money($input)">
+    </div>
+
+    <div class="sales-submit-btn" x-on:click="submitSale()">Submit</div>
+</div>
+
+<script>
+    function editSaleForm() {
+        return {
+            description: "{{ sale.description }}",
+            sku: "{{ sale.product_id }}",
+            discount: "{{ sale.discount }}",
+
+            submitSale() {
+                fetch(`{{ url_for('sales.edit', sale_id=sale.id) }}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        description: this.description,
+                        sku: parseInt(this.sku),
+                        discount: parseFloat(this.discount)
+                    })
+                }).then(response => {
+                    if (response.ok) {
+                        window.location.href = `{{ url_for('sales.list') }}`;
+                    } else {
+                        alert('Failed to update sale');
+                    }
+                });
+            },
+        }
+    }
+</script>
+{% endblock %}

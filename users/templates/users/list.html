@@ -1,39 +1,33 @@
 {% extends "base.html" %}
 
-{% block title %}Products{% endblock %}
+{% block title %}Users{% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" href="{{ url_for('products.static', filename='styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('users.static', filename='styles.css') }}">
 {% endblock %}
 
 {% block content %}
-<h1>Products</h1>
-<div class="products-create-div">
-    <a href="{{ url_for('products.create') }}" class="products-create-btn">Create New Product</a>
+<h1>Users</h1>
+<div class="users-create-div">
+    <a href="{{ url_for('users.create') }}" class="users-create-btn">Create New User</a>
 </div>
 
-<div class="products-listing" x-data="listProducts()">
-    {% for product in products %}
-    <div class="product-item">
+<div class="users-listing" x-data="listUsers()">
+    {% for user in users %}
+    <div class="user-item">
         <div>
-            <h2>{{ product.name }} (SKU: {{ product.id }})</h2>
-            <p>{{ product.description }}</p>
-            <p>Type: {{ product.type }}</p>
-            {% if product.total_discount == 0 %}
-            <p>Price: R$ {{ product.price }}</p>
-            {% else %}
-            <p>Price: R$ {{ product.price }} (Discount: R$ {{ product.total_discount }})</p>
-            {% endif %}
+            <h2>User #{{ user.id }}</h2>
+            <p>{{ user.username }}</p>
         </div>
         <div style="flex: 1;"></div>
-        <a class="product-edit" href="{{ url_for('products.edit', product_id=product.id)}}">
+        <a class="user-edit" href="{{ url_for('users.edit', user_id=user.id)}}">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
             </svg>
         </a>
-        <div class="product-remove" x-on:click="deleteProduct({{ product.id }})">
+        <div class="user-remove" x-on:click="deleteUser({{ user.id }})">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -44,5 +38,5 @@
     {% endfor %}
 </div>
 
-<script src="{{ url_for('products.static', filename='js/list.js')}}"></script>
+<script src="{{ url_for('users.static', filename='js/list.js') }}"></script>
 {% endblock %}

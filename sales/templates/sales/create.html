@@ -23,8 +23,8 @@
 
     <div class="sales-create-form-item">
         <h2>Discount</h2>
-        <input type="number" step="0.01" placeholder="Enter discount value" x-model="discount"
-            x-mask:dynamic="$money($input)">
+        <input type="text" placeholder="Enter discount value" x-model="discount"
+            x-mask:dynamic="$money($input, '.', '')">
     </div>
 
 

@@ -4,8 +4,8 @@
     </a>
 
     <a href="{{ url_for('products.list') }}">Products</a>
-    <a href="#">Clients</a>
     <a href="{{ url_for('sales.list') }}">Sales</a>
+    <a href="{{ url_for('users.list')}}">Users</a>
     <div style="flex: 1;"></div>
     <div class="ecommerce-logout" x-on:click="logout()">Logout</div>
 </div>

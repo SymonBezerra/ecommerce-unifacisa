@@ -26,7 +26,7 @@ def create():
     if request.method == "POST":
         data = request.get_json()
         description = data.get("description")
-        product_id = data.get("product_id")
+        product_id = data.get("sku")
         discount = data.get("discount")
 
         try:

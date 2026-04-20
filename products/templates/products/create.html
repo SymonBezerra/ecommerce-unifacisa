@@ -23,7 +23,7 @@
 
     <div class="products-create-form-item">
         <h2>Price</h2>
-        <input x-mask:dynamic="$money($input)" x-model="price">
+        <input x-mask:dynamic="$money($input, '.', '')" x-model="price">
     </div>
 
     <div class="products-create-form-item">

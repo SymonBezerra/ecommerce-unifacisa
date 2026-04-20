@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecommerce - Login</title>
+    <link href="{{ url_for('login.static', filename='styles.css') }}" rel="stylesheet">
+    <script src="//unpkg.com/alpinejs" defer></script>
+</head>
+
+<body>
+    <div class="login-container" x-data="editUserForm()">
+        <div class="login-form">
+            <h2>Ecommerce</h2>
+            <div class="login-item">
+                <p>Username</p>
+                <input type="text" placeholder="Enter your username" x-model="username">
+                <p>Password</p>
+                <input type="password" placeholder="Enter your password" x-model="password">
+                <p>Confirm Password</p>
+                <input type="password" placeholder="Confirm your password" x-model="confirmPassword">
+            </div>
+            <div class="login-submit" x-on:click="submitRegister()">Update</div>
+            <p style="color: red;" x-text="errorMsg"></p>
+            <a class="login-register" href="{{ url_for('login.index') }}">Already have an account? Login</a>
+        </div>
+
+    </div>
+    <script>
+        function editUserForm() {
+            return {
+                username: "{{ username }}",
+                password: "",
+                confirmPassword: "",
+                errorMsg: "",
+                submitRegister() {
+                    if (this.password !== this.confirmPassword) {
+                        this.errorMsg = "Passwords do not match.";
+                        return;
+                    }
+
+                    fetch("{{ url_for('users.edit', user_id=user_id) }}", {
+                        method: "PATCH",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            username: this.username,
+                            password: this.password
+                        })
+                    }).then(response => {
+                        if (response.ok) {
+                            window.location.href = "{{ url_for('users.list') }}";
+                        } else {
+                            response.json().then(data => {
+                                this.errorMsg = data.message || "An error occurred.";
+                            });
+                        }
+                    }).catch(() => {
+                        this.errorMsg = "An error occurred while connecting to the server.";
+                    });
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

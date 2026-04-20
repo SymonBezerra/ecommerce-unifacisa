@@ -5,6 +5,7 @@ from flask_login import login_required
 
 
 from products.model import ProductModel
+from sales.model import SaleModel
 
 
 products_bp = Blueprint(
@@ -20,6 +21,9 @@ products_bp = Blueprint(
 @login_required
 def list():
     products = ProductModel.query.all()
+    for product in products:
+        product_sales = SaleModel.query.filter_by(product_id=product.id).all()
+        product.total_discount = sum([sale.discount for sale in product_sales])
     return render_template("products/list.html", products=products)
 
 
@@ -69,7 +73,7 @@ def edit(product_id):
         product.description = data["description"]
         product.type = data["type"]
         product.price = data["price"]
-        product.expiration_dsate = datetime.strptime(
+        product.expiration_date = datetime.strptime(
             data["expirationDate"], "%d/%m/%Y"
         ).date()
         try:

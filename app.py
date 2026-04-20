@@ -8,6 +8,7 @@ from sales.blueprint import sales_bp
 from generic.model import db
 from login.blueprint import login_bp
 from products.blueprint import products_bp
+from users.blueprint import users_bp
 from users.model import UserModel
 
 
@@ -24,6 +25,7 @@ login_manager.init_app(app)
 app.register_blueprint(login_bp)
 app.register_blueprint(products_bp)
 app.register_blueprint(sales_bp)
+app.register_blueprint(users_bp)
 
 with app.app_context():
     db.create_all()
